@@ -20,7 +20,7 @@ public class EstadoHormigaBuscar : IEstadoHormiga {
 
             return h.ePerseguir;
         } else {
-            return h.eBuscar;
+            return h.eRandom;
         }
     }
 }

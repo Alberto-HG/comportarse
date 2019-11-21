@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TRexStateEat : IStatesTRex
-{
-
-    void Update(TRex t)
-    {
+public class TRexStateEat : IStatesTRex {
+    public IStatesTRex Update(TRex t) {
         return t.eatState;
     }
 }

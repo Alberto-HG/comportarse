@@ -2,39 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace StatePattern
-{
-    public class TRex
-    {
-        public int health;
+public class TRex : MonoBehaviour{
+    public int health;
 
-        IStatesTRex state;
+    IStatesTRex state;
 
-        [HideInInspector]
-        public TRexStateAttack attackState;
-        [HideInInspector]
-        public TRexStateEat eatState;
-        [HideInInspector]
-        public TRexStateSearch searchState;
-        [HideInInspector]
-        public TRexStateRun runState;
+    [HideInInspector]
+    public TRexStateAttack attackState;
+    [HideInInspector]
+    public TRexStateEat eatState;
+    [HideInInspector]
+    public TRexStateSearch searchState;
+    [HideInInspector]
+    public TRexStateRun runState;
 
-        void Start()
-        {
-            health = 100;
+    void Start() {
+        health = 100;
 
-            attackState = new TRexStateAttack();
-            eatState = new TRexStateEat();
-            searchState = new TRexStateSearch();
-            runState = new TRexStateRun();
+        attackState = new TRexStateAttack();
+        eatState = new TRexStateEat();
+        searchState = new TRexStateSearch();
+        runState = new TRexStateRun();
 
-            state = searchState;
-        }
+        state = searchState;
+    }
 
-        // Update is called once per frame
-        void Update()
-        {
-            state = state.Update(this);
-        }
+    // Update is called once per frame
+    void Update() {
+        state = state.Update(this);
     }
 }
