@@ -3,9 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TRexStateSearch : IStatesTRex {
-    public int speed = 5;
+
+    int enemies = 2;
+    int enemySize = 10;
 
     public IStatesTRex Update(TRex t) {
-        return t.searchState;
+
+        int rand = Random.Range(25, 50);
+        if(rand < enemies * enemySize) {
+            return t.runState;
+        } else {
+            return t.attackState;
+        }
     }
 }

@@ -3,7 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TRexStateAttack : IStatesTRex {
+
+    float force;
+    int attackSpeed = 5;
+    ScriptDeMierdaParaProbarCosas rival;
+
     public IStatesTRex Update(TRex t) {
-        return t.attackState;
+
+        t.agent.speed = attackSpeed;
+        force = t.size * 10;
+        t.agent.destination = t.enemy.transform.position;
+        if (t.agent.remainingDistance < 2) {
+            t.agent.isStopped = true;
+            rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
+            rival.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            t.health -= rival.force;
+            if (force < rival.health) {
+                //AQUI DEBERIA CAMBIAR LA VIDA DEL RIVAL
+                return t.attackState;
+            } else {
+                return t.eatState;
+            }
+        } else {
+            return t.attackState;
+        }
     }
 }

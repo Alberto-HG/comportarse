@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class TRexStateRun : IStatesTRex {
-    public int runSpeed = 10;
+
+    public int runSpeed = 5;
 
     public IStatesTRex Update(TRex t) {
-        return t.runState;
+
+        t.agent.speed = runSpeed;
+        t.agent.destination = t.transform.position - 4*(t.enemy.transform.position - t.transform.position);
+        if (t.agent.remainingDistance == 0) {
+            return t.wanderState;
+        } else {
+            return t.runState;
+        }
     }
 }
