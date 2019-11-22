@@ -11,12 +11,15 @@ public class TRexStateEat : IStatesTRex {
 
         rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
         rivalObject = t.enemy.gameObject;
+        Collider col = rivalObject.GetComponent<Collider>();
+        col.enabled = false;
         if (rival.eatable) {
             t.health += rival.healthRegen;
             Object.Destroy(rivalObject);
         }
 
         t.agent.destination = t.transform.position + new Vector3(1, 1, 1);
+        t.agent.isStopped = false;
         return t.wanderState;
     }
 }

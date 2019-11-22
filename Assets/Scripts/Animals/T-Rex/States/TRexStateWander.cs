@@ -11,7 +11,7 @@ public class TRexStateWander : IStatesTRex {
 
         t.agent.speed = speed;
         int rand = Random.Range(0, 100);
-        if(rand > 50) {
+        if(rand > 80) {
             t.agent.destination = t.transform.position + new Vector3((Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80);
         }
         return t.wanderState;

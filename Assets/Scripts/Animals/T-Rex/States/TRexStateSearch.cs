@@ -5,7 +5,7 @@ using UnityEngine;
 public class TRexStateSearch : IStatesTRex {
 
     int enemies = 2;
-    int enemySize = 10;
+    int enemySize = 18;
 
     public IStatesTRex Update(TRex t) {
 
