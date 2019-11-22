@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EstadoHormigaAtacar : IEstadoHormiga {
     public IEstadoHormiga Update(Hormiga h) {
-        Object.Destroy(h.gameObject);
-        return h.eAtacar;
+
+        return h.eMuerta;
     }
 }

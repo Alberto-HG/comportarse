@@ -3,46 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Hormiga : MonoBehaviour {
+public class HormigaReina : MonoBehaviour
+{
+    IEstadoHormigaReina estado;
 
-    IEstadoHormiga estado;
-
     [HideInInspector]
-    public EstadoHormigaAtacar eAtacar;
+    public EstadoHormigaReinaAtacar eAtacar;
     [HideInInspector]
-    public EstadoHormigaBuscar eBuscar;
+    public EstadoHormigaReinaHuir eHuir;
     [HideInInspector]
-    public EstadoHormigaPerseguir ePerseguir;
-    [HideInInspector]
-    public EstadoHormigaRandom eRandom;
-    [HideInInspector]
-    public EstadoHormigaMuerta eMuerta;
+    public EstadoHormigaReinaMantener eMantener;
 
     [HideInInspector]
     public List<Collider> sonarList;
     [HideInInspector]
     public NavMeshAgent nma;
 
-    [HideInInspector]
-    public bool reinaViva;
-    [HideInInspector]
-    public Transform reina;
+    Hormiga[] hormigas;
+    public GameObject HormigaPrefab;
 
     void Start() {
-        eAtacar = new EstadoHormigaAtacar();
-        eBuscar = new EstadoHormigaBuscar();
-        ePerseguir = new EstadoHormigaPerseguir();
-        eRandom = new EstadoHormigaRandom();
-        eMuerta = new EstadoHormigaMuerta();
+        eAtacar = new EstadoHormigaReinaAtacar();
+        eHuir = new EstadoHormigaReinaHuir();
+        eMantener = new EstadoHormigaReinaMantener();
 
-        estado = eBuscar;
-        
+        estado = eMantener;
+
         sonarList = new List<Collider>();
         nma = GetComponent<NavMeshAgent>();
 
-        nma.Warp(reina.position - reina.forward * 2);
+        hormigas = new Hormiga[20];
+
+        for (int i = 0; i < hormigas.Length; i++) {
+            hormigas[i] = Object.Instantiate(HormigaPrefab).GetComponent<Hormiga>();
+
+            hormigas[i].reina = transform;
+            hormigas[i].reinaViva = true;
+        }
     }
-    
+
     void Update() {
         estado = estado.Update(this);
     }

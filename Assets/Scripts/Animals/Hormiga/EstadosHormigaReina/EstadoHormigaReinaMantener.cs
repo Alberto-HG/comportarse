@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EstadoHormigaBuscar : IEstadoHormiga {
-    public IEstadoHormiga Update(Hormiga h) {
+public class EstadoHormigaReinaMantener : IEstadoHormigaReina {
+    public IEstadoHormigaReina Update(HormigaReina h) {
         Collider closestEnemy = null;
 
         foreach (Collider col in h.sonarList) {
@@ -17,10 +17,10 @@ public class EstadoHormigaBuscar : IEstadoHormiga {
         }
 
         if (closestEnemy != null) {
-            h.ePerseguir.target = closestEnemy.transform;
-            return h.ePerseguir;
+            h.eHuir.target = closestEnemy.transform;
+            return h.eHuir;
         } else {
-            return h.eRandom;
+            return h.eMantener;
         }
     }
 }

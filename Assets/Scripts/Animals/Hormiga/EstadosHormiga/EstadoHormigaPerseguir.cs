@@ -5,11 +5,15 @@ using UnityEngine;
 public class EstadoHormigaPerseguir : IEstadoHormiga {
     public Transform target;
     public IEstadoHormiga Update(Hormiga h) {
+        if (target == null) {
+            return h.eBuscar;
+        }
+
         if (Vector3.Distance(h.transform.position, target.position) > 1) {
-            Debug.Log(Vector3.Distance(h.transform.position, target.position));
             h.nma.destination = target.position;
             return h.ePerseguir;
         } else {
+            target = null;
             return h.eAtacar;
         }
     }
