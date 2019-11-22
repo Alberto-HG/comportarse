@@ -20,6 +20,7 @@ public class TRexStateEat : IStatesTRex {
 
         t.agent.destination = t.transform.position + new Vector3(1, 1, 1);
         t.agent.isStopped = false;
+        t.enemy = null;
         return t.wanderState;
     }
 }

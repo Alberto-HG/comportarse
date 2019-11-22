@@ -7,6 +7,7 @@ public class TRex : MonoBehaviour {
 
     public float health;
     public int size;
+    public int groupSize;
 
     [HideInInspector]
     public Collider enemy;
@@ -29,7 +30,8 @@ public class TRex : MonoBehaviour {
 
     void Start() {
         health = 100;
-        size = 5;
+        size = 2;
+        groupSize = 1;
 
         attackState = new TRexStateAttack();
         eatState = new TRexStateEat();
@@ -44,10 +46,23 @@ public class TRex : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         state = state.Update(this);
+        if(health <= 0) {
+            //DIE
+        }
     }
 
     private void OnTriggerEnter(Collider col) {
-        enemy = col;
-        state = searchState;
+        if(col.GetComponent<TRex>() != null) {
+            groupSize++;
+        } else {
+            enemy = col;
+            state = searchState;
+        }
+    }
+
+    private void OnTriggerExit(Collider col) {
+        if (col.GetComponent<TRex>() != null) {
+            groupSize--;
+        }
     }
 }

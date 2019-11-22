@@ -12,7 +12,11 @@ public class TRexStateAttack : IStatesTRex {
 
         t.agent.speed = attackSpeed;
         force = t.size * 10;
-        t.agent.destination = t.enemy.transform.position;
+        if (t.enemy == null) {
+            return t.wanderState;
+        } else {
+            t.agent.destination = t.enemy.transform.position;
+        }
         if (t.agent.remainingDistance < 2) {
             t.agent.isStopped = true;
             rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();

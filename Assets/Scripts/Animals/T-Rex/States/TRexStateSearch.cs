@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class TRexStateSearch : IStatesTRex {
 
-    int enemies = 2;
-    int enemySize = 18;
+    int enemies;
+    ScriptDeMierdaParaProbarCosas rival;
+    float enemySize;
+    float force;
 
     public IStatesTRex Update(TRex t) {
 
-        int rand = Random.Range(25, 50);
+        rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
+        enemies = rival.groupSize;
+        enemySize = rival.size;
+        force = t.size * 7.5f;
+        int rand = Random.Range((int)(t.groupSize * force * 0.75f), (int)(t.groupSize * force * 1.25f));
         if(rand < enemies * enemySize) {
             return t.runState;
         } else {

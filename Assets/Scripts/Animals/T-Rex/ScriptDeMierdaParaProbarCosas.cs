@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class ScriptDeMierdaParaProbarCosas : MonoBehaviour {
 
-    public float health = 10;
+
+    public int groupSize;
+    public float health;
     public float healthRegen;
+    public float size;
     public float force;
     public bool eatable;
 
     void Start() {
-        force = Random.Range(10, 51);
+        groupSize = 1;
+        health = 10;
+        size = 15;
+        force = Random.Range(1, 3) * size;
         if (Random.Range(0, 2) < 1) {
             eatable = true;
             healthRegen = Random.Range(10, 31);

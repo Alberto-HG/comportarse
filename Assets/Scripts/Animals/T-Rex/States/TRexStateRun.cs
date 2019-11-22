@@ -12,6 +12,7 @@ public class TRexStateRun : IStatesTRex {
         t.agent.speed = runSpeed;
         t.agent.destination = t.transform.position - 4*(t.enemy.transform.position - t.transform.position);
         if (t.agent.remainingDistance == 0) {
+            t.enemy = null;
             return t.wanderState;
         } else {
             return t.runState;
