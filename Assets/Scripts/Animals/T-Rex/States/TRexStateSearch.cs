@@ -15,7 +15,10 @@ public class TRexStateSearch : IStatesTRex {
         enemies = rival.groupSize;
         enemySize = rival.size;
         force = t.size * 7.5f;
-        int rand = Random.Range((int)(t.groupSize * force * 0.75f), (int)(t.groupSize * force * 1.25f));
+        if (t.grouped) {
+            force *= 2;
+        }
+        int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
         if(rand < enemies * enemySize) {
             return t.runState;
         } else {

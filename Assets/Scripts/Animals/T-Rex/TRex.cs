@@ -7,7 +7,7 @@ public class TRex : MonoBehaviour {
 
     public float health;
     public int size;
-    public int groupSize;
+    public bool grouped;
 
     [HideInInspector]
     public Collider enemy;
@@ -31,7 +31,7 @@ public class TRex : MonoBehaviour {
     void Start() {
         health = 100;
         size = 2;
-        groupSize = 1;
+        grouped = false;
 
         attackState = new TRexStateAttack();
         eatState = new TRexStateEat();
@@ -53,7 +53,7 @@ public class TRex : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col) {
         if(col.GetComponent<TRex>() != null) {
-            groupSize++;
+            grouped = true;
         } else {
             enemy = col;
             state = searchState;
@@ -62,7 +62,7 @@ public class TRex : MonoBehaviour {
 
     private void OnTriggerExit(Collider col) {
         if (col.GetComponent<TRex>() != null) {
-            groupSize--;
+            grouped = false;
         }
     }
 }

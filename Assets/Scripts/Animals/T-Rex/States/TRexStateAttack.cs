@@ -20,7 +20,10 @@ public class TRexStateAttack : IStatesTRex {
         if (t.agent.remainingDistance < 2) {
             t.agent.isStopped = true;
             rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
+
+            //ESTO HAY QUE CAMBIARLO PARA QUE SOLO SE EJECUTE SI EL RIVAL MUERE, ES EJEMPLO DE CADAVER
             rival.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            
             t.health -= rival.force;
             if (force < rival.health) {
                 //AQUI DEBERIA CAMBIAR LA VIDA DEL RIVAL
