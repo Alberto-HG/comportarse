@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour {
     public float speed = 10;
@@ -40,5 +41,9 @@ public class CameraController : MonoBehaviour {
                 transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y - zoom * zoomSpeed * Time.deltaTime, transform.localPosition.z);
             }
         }
+    }
+
+    public void Volver() {
+        SceneManager.LoadScene(0);
     }
 }
