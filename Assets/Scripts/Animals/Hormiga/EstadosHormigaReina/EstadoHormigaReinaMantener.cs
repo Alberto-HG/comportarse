@@ -7,11 +7,13 @@ public class EstadoHormigaReinaMantener : IEstadoHormigaReina {
         Collider closestEnemy = null;
 
         foreach (Collider col in h.sonarList) {
-            if (closestEnemy == null) {
-                closestEnemy = col;
-            } else {
-                if (Vector3.Distance(col.transform.position, h.transform.position) < Vector3.Distance(closestEnemy.transform.position, h.transform.position)) {
+            if (col != null) {
+                if (closestEnemy == null) {
                     closestEnemy = col;
+                } else {
+                    if (Vector3.Distance(col.transform.position, h.transform.position) < Vector3.Distance(closestEnemy.transform.position, h.transform.position)) {
+                        closestEnemy = col;
+                    }
                 }
             }
         }

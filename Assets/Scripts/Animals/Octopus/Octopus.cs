@@ -25,7 +25,9 @@ public class Octopus : MonoBehaviour {
     public NavMeshAgent agent;
 
     void Start() {
-        health = Settings.tamTrex * 50;
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamPulpos;
+
+        health = Settings.tamPulpos * 50;
         water = false;
 
         attackState = new OctopusStateAttack();
@@ -48,7 +50,7 @@ public class Octopus : MonoBehaviour {
     public void GetHit(int damage) {
         health -= damage;
 
-        if (health < 0) {
+        if (health < 1) {
             DestroyImmediate(gameObject);
         }
     }
@@ -58,6 +60,14 @@ public class Octopus : MonoBehaviour {
         if (enemy == null && (col.gameObject.CompareTag("Gallina") || col.gameObject.CompareTag("TRex") || col.gameObject.CompareTag("Hormiga"))) {
             enemy = col;
             state = attackState;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && state == attackState) {
+            if (collision.collider.transform == enemy.transform) {
+                attackState.colision = true;
+            }
         }
     }
 }

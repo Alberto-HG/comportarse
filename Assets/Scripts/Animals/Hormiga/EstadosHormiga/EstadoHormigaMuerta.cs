@@ -6,7 +6,7 @@ public class EstadoHormigaMuerta : IEstadoHormiga
 {
     public IEstadoHormiga Update(Hormiga h) {
         if (h.reinaViva) {
-            h.nma.Warp(h.reina.position - h.reina.forward * 2);
+            h.nma.Warp(h.reina.position - h.reina.forward * 2 * Settings.tamHormigas);
             return h.eBuscar;
         } else {
             Object.DestroyImmediate(h.gameObject);

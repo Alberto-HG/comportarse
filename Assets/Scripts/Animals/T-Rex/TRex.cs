@@ -26,6 +26,8 @@ public class TRex : MonoBehaviour {
     public NavMeshAgent agent;
 
     void Start() {
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamTrex;
+
         health = Settings.tamTrex * 50;
         grouped = 0;
 
@@ -46,14 +48,16 @@ public class TRex : MonoBehaviour {
     public void GetHit (int damage) {
         health -= damage;
 
-        if (health < 0) {
+        if (health < 1) {
             DestroyImmediate(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider col) {
         if(col.gameObject.CompareTag(gameObject.tag)) {
-            grouped++;
+            if (col.gameObject != gameObject) {
+                grouped++;
+            }
         } else if (enemy == null && (col.gameObject.CompareTag("Pulpo") || col.gameObject.CompareTag("TRex") || col.gameObject.CompareTag("Hormiga"))) {
             enemy = col;
             state = searchState;
@@ -63,6 +67,14 @@ public class TRex : MonoBehaviour {
     private void OnTriggerExit(Collider col) {
         if (col.gameObject.CompareTag(gameObject.tag)) {
             grouped--;
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && state == attackState) {
+            if (collision.collider.transform == enemy.transform) {
+                attackState.colision = true;
+            }
         }
     }
 }

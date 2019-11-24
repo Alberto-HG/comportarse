@@ -23,15 +23,15 @@ public class EstadoGallinaAtacar : IEstadoGallina {
                 }
             }
 
-            /*if (target.gameObject.CompareTag("Pulpo")) {
+            if (target.gameObject.CompareTag("Pulpo")) {
                 Octopus o = target.gameObject.GetComponent<Octopus>();
-                o.getHit(g.berserk ? g.fuerza * 3 : g.fuerza);
+                o.GetHit(g.berserk ? g.fuerza * 3 : g.fuerza);
             }
 
             if (target.gameObject.CompareTag("TRex")) {
                 TRex t = target.gameObject.GetComponent<TRex>();
-                t.getHit(g.berserk ? g.fuerza * 3 : g.fuerza);
-            }*/
+                t.GetHit(g.berserk ? g.fuerza * 3 : g.fuerza);
+            }
 
             if (g.fuerza > 10) {
                 g.fuerza -= 1;

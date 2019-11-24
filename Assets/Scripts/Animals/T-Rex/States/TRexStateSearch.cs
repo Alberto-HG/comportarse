@@ -14,7 +14,7 @@ public class TRexStateSearch : IStatesTRex {
         }
         if (t.enemy.gameObject.CompareTag("Pulpo")) {
             int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
-            if (rand < Settings.tamPulpos * 15) {
+            if (rand < Settings.tamPulpos * 10) {
                 return t.runState;
             } else {
                 return t.attackState;
@@ -23,7 +23,7 @@ public class TRexStateSearch : IStatesTRex {
             Hormiga rival = t.enemy.GetComponent<Hormiga>();
             if (rival == null) {
                 int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
-                if (rand < Settings.tamHormigas * 10) {
+                if (rand < Settings.tamHormigas * 5) {
                     return t.runState;
                 } else {
                     return t.attackState;
@@ -33,7 +33,7 @@ public class TRexStateSearch : IStatesTRex {
             }
         } else {
             int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
-            if (rand < Settings.tamGallinas * 5) {
+            if (rand < Settings.tamGallinas) {
                 return t.runState;
             } else {
                 return t.attackState;

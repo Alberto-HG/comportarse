@@ -32,7 +32,7 @@ public class Hormiga : MonoBehaviour {
 
     void Start() {
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamHormigas;
-        fuerza = Settings.tamHormigas;
+        fuerza = Settings.tamHormigas * 2;
 
         eAtacar = new EstadoHormigaAtacar();
         eBuscar = new EstadoHormigaBuscar();

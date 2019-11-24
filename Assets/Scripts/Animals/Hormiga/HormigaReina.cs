@@ -21,8 +21,8 @@ public class HormigaReina : MonoBehaviour {
     [HideInInspector]
     public NavMeshAgent nma;
 
-    Hormiga[] hormigas;
-    public GameObject HormigaPrefab;
+    [HideInInspector]
+    public Hormiga[] hormigas;
 
     void Start() {
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamHormigas;
@@ -36,15 +36,7 @@ public class HormigaReina : MonoBehaviour {
 
         sonarList = new List<Collider>();
         nma = GetComponent<NavMeshAgent>();
-
-        hormigas = new Hormiga[Settings.numHormigas];
-
-        for (int i = 0; i < hormigas.Length; i++) {
-            hormigas[i] = Instantiate(HormigaPrefab).GetComponent<Hormiga>();
-
-            hormigas[i].reina = transform;
-            hormigas[i].reinaViva = true;
-        }
+        nma.Warp(transform.position);
     }
 
     void Update() {
@@ -54,7 +46,7 @@ public class HormigaReina : MonoBehaviour {
     public void GetHit(int daño) {
         vida -= daño;
 
-        if (vida < 0) {
+        if (vida < 1) {
             foreach (Hormiga h in hormigas) {
                 h.reinaViva = false;
             }

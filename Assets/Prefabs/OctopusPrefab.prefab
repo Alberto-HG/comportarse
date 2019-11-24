@@ -11,12 +11,13 @@ GameObject:
   - component: {fileID: 3657536541744684072}
   - component: {fileID: 6649615266783654226}
   - component: {fileID: 3618196131531602544}
+  - component: {fileID: 7365455447022577539}
   - component: {fileID: 957588403516772373}
   - component: {fileID: 6431183071043384847}
   - component: {fileID: 4490165054797925556}
   m_Layer: 0
-  m_Name: octopus
-  m_TagString: Untagged
+  m_Name: OctopusPrefab
+  m_TagString: Pulpo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 331427730684194363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 73.3, y: 10.27, z: 98.45}
-  m_LocalScale: {x: 0.28993, y: 0.28993, z: 0.28993}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6899059524192046653}
   - {fileID: 4531921663798848160}
@@ -70,8 +71,21 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!65 &7365455447022577539
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331427730684194363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!65 &957588403516772373
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83,8 +97,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 9.005623, y: 1, z: 18.87689}
-  m_Center: {x: 0.08427254, y: 0, z: 6.289876}
+  m_Size: {x: 9, y: 1, z: 18}
+  m_Center: {x: 0, y: 1, z: 6}
 --- !u!195 &6431183071043384847
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -887,7 +901,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5869534684044658137}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.16478209, y: -0.5422323, z: 0.14233573}
+  m_LocalPosition: {x: 0.05, y: 0.425, z: 0.3}
   m_LocalScale: {x: 100, y: 99.99995, z: 99.99994}
   m_Children:
   - {fileID: 2282291092695792922}
@@ -1225,7 +1239,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 670224309865224971, guid: e86e488a7ff275a4fb42cd6b55f18380, type: 3}
+  - {fileID: 2100000, guid: 028d08f9f26da9c4b8ef4ea7a96be8cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

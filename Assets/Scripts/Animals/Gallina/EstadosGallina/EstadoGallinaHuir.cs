@@ -23,8 +23,9 @@ public class EstadoGallinaHuir : IEstadoGallina {
             g.fuerza -= 1;
         }
 
-        if (g.velocidad > 0.5f && Time.time - time > 1f) {
+        if (g.velocidad > 1f && Time.time - time > 1f) {
             g.velocidad -= 0.5f;
+            g.nma.speed = g.velocidad;
             time = Time.time;
         }
 

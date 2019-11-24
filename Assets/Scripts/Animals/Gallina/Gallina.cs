@@ -38,7 +38,7 @@ public class Gallina : MonoBehaviour {
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamGallinas;
         vida = 50 * Settings.tamGallinas;
         fuerza = 10 * Settings.tamGallinas;
-        velocidad = 0.5f * Settings.tamGallinas;
+        velocidad = Settings.tamGallinas;
         berserk = false;
 
         vidaInicial = vida;
@@ -74,7 +74,7 @@ public class Gallina : MonoBehaviour {
             berserk = true;
         }
 
-        if (vida < 0) {
+        if (vida < 1) {
             Destroy(gameObject);
         }
     }

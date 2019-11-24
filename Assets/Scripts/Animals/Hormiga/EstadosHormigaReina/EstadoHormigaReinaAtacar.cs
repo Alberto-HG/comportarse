@@ -19,15 +19,15 @@ public class EstadoHormigaReinaAtacar : IEstadoHormigaReina {
                 g.GetHit(h.fuerza);
             }
 
-            /*if (target.gameObject.CompareTag("Pulpo")) {
+            if (target.gameObject.CompareTag("Pulpo")) {
                 Octopus o = target.gameObject.GetComponent<Octopus>();
-                o.getHit();
+                o.GetHit(h.fuerza);
             }
 
             if (target.gameObject.CompareTag("TRex")) {
                 TRex t = target.gameObject.GetComponent<TRex>();
-                t.getHit();
-            }*/
+                t.GetHit(h.fuerza);
+            }
         }
 
         return h.eAtacar;
