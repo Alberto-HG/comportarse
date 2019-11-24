@@ -32,10 +32,10 @@ public class HormigaReina : MonoBehaviour
         sonarList = new List<Collider>();
         nma = GetComponent<NavMeshAgent>();
 
-        hormigas = new Hormiga[20];
+        hormigas = new Hormiga[Settings.numHormigas];
 
         for (int i = 0; i < hormigas.Length; i++) {
-            hormigas[i] = Object.Instantiate(HormigaPrefab).GetComponent<Hormiga>();
+            hormigas[i] = Instantiate(HormigaPrefab).GetComponent<Hormiga>();
 
             hormigas[i].reina = transform;
             hormigas[i].reinaViva = true;

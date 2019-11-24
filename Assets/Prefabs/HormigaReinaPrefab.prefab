@@ -48,7 +48,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2, y: 0.9, z: 1.4}
+  m_Size: {x: 1.4, y: 0.9, z: 2}
   m_Center: {x: 0, y: 0.47, z: 0}
 --- !u!65 &5879579718904203651
 BoxCollider:
@@ -116,7 +116,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5879579718904203677}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 3
   m_Acceleration: 8
@@ -128,7 +128,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 0.85
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 7
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &5879579718735856669
 PrefabInstance:
