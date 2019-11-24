@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase encargada de generar las hormigas al principio de la simulacion
 public class SpawnerHormigas : MonoBehaviour {
     public GameObject hormigaPrefab;
     public GameObject hormigaReinaPrefab;

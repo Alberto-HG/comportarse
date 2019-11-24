@@ -6,6 +6,7 @@ public class EstadoHormigaBuscar : IEstadoHormiga {
     public IEstadoHormiga Update(Hormiga h) {
         Collider closestEnemy = null;
 
+        //Recorre los objetivos en su vision y se queda con el mas cercano
         foreach (Collider col in h.sonarList) {
             if (col != null) {
                 if (closestEnemy == null) {
@@ -18,6 +19,7 @@ public class EstadoHormigaBuscar : IEstadoHormiga {
             }
         }
 
+        //Si ha encontrado un enemigo lo ataca
         if (closestEnemy != null) {
             h.ePerseguir.target = closestEnemy.transform;
             return h.ePerseguir;

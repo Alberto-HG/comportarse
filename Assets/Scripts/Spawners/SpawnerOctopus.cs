@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase encargada de generar los pulpos al principio de la simulacion
 public class SpawnerOctopus : MonoBehaviour {
     public GameObject octopusPrefab;
     public Transform lago;

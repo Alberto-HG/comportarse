@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Gallina : MonoBehaviour {
+    //Estadisticas
     public int vida;
     public int fuerza;
     public float velocidad;
@@ -16,8 +17,10 @@ public class Gallina : MonoBehaviour {
     [HideInInspector]
     public float velocidadInicial;
 
+    //Estado actual
     public IEstadoGallina estado;
 
+    //Referencias a estados
     [HideInInspector]
     public EstadoGallinaAtacar eAtacar;
     [HideInInspector]
@@ -29,40 +32,47 @@ public class Gallina : MonoBehaviour {
     [HideInInspector]
     public EstadoGallinaHuir eHuir;
 
+    //Vision
     [HideInInspector]
     public List<Collider> visionList;
+
+    //Agente de pathfinding
     [HideInInspector]
     public NavMeshAgent nma;
 
     void Start() {
+        //Inicializamos las estadisticas
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamGallinas;
         vida = 50 * Settings.tamGallinas;
         fuerza = 10 * Settings.tamGallinas;
         velocidad = Settings.tamGallinas;
         berserk = false;
+        visionList = new List<Collider>();
 
         vidaInicial = vida;
         fuerzaInicial = fuerza;
         velocidadInicial = velocidad;
 
+        //Inicializamos los estados
         eAtacar = new EstadoGallinaAtacar();
         eBuscar = new EstadoGallinaBuscar();
         ePerseguir = new EstadoGallinaPerseguir();
         eRandom = new EstadoGallinaRandom();
         eHuir = new EstadoGallinaHuir();
-
         estado = eBuscar;
 
-        visionList = new List<Collider>();
+        //Inicializamos el agente de pathfinding
         nma = GetComponent<NavMeshAgent>();
         nma.speed = velocidad;
         nma.Warp(transform.position);
     }
 
     void Update() {
+        //Realizamos el update de nuestro estado y cambiamos la referencia al siguiente
         estado = estado.Update(this);
     }
 
+    //Funcion que maneja el daño recibido
     public void GetHit(int daño) {
         vida -= daño;
 
@@ -79,6 +89,7 @@ public class Gallina : MonoBehaviour {
         }
     }
 
+    //Funciones que maneja la vision
     private void OnTriggerEnter(Collider other) {
         if (!visionList.Contains(other) && !other.gameObject.CompareTag(gameObject.tag)) {
             visionList.Add(other);
@@ -91,6 +102,7 @@ public class Gallina : MonoBehaviour {
         }
     }
 
+    //Funcion que maneja la colision
     private void OnCollisionStay(Collision collision) {
         if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && estado == ePerseguir) {
             if (collision.collider.transform == ePerseguir.target) {

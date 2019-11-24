@@ -7,14 +7,17 @@ public class EstadoGallinaPerseguir : IEstadoGallina {
     public bool colision = false;
 
     public IEstadoGallina Update(Gallina g) {
+        //Si ha muerto el objetivo, volver a buscar
         if (target == null) {
             return g.eBuscar;
         }
 
+        //Mientras no estamos cerca mantener el objetivo
         if (!colision) {
             g.nma.destination = target.position;
             return g.ePerseguir;
         } else {
+            //Si se alcanza al objetivo se mira si se pueden agrupar 3 o mas gallinas. Si se puede se ataca, si no, se huye
             colision = false;
 
             int numGrupo = 0;

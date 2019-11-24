@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase encargada de generar los Trex al principio de la simulacion
 public class SpawnerTRex : MonoBehaviour {
     public GameObject trexPrefab;
 

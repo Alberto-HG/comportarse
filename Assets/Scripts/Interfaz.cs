@@ -14,6 +14,7 @@ public class Interfaz : MonoBehaviour {
     public TextMeshProUGUI numTrex;
     public TextMeshProUGUI tamTrex;
 
+    //Manejadores de las barras
     public void BarraNumGallinas(float value) {
         Settings.numGallinas = (int) value;
         numGallinas.SetText("" + value);
@@ -54,6 +55,7 @@ public class Interfaz : MonoBehaviour {
         tamTrex.SetText("" + value);
     }
 
+    //Boton de comenzar
     public void Comenzar() {
         SceneManager.LoadScene(1);
     }

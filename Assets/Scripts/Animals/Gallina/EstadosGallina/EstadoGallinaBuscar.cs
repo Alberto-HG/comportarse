@@ -6,6 +6,7 @@ public class EstadoGallinaBuscar : IEstadoGallina {
     public IEstadoGallina Update(Gallina g) {
         Collider closestEnemy = null;
 
+        //Recorre los objetivos en su vision y se queda con el mas cercano
         foreach (Collider col in g.visionList) {
             if (col != null) {
                 if (closestEnemy == null) {
@@ -18,6 +19,7 @@ public class EstadoGallinaBuscar : IEstadoGallina {
             }
         }
 
+        //Si ha encontrado un enemigo lo ataca
         if (closestEnemy != null) {
             g.ePerseguir.target = closestEnemy.transform;
             return g.ePerseguir;

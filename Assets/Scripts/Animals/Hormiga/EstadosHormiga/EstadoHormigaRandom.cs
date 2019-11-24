@@ -13,6 +13,7 @@ public class EstadoHormigaRandom : IEstadoHormiga {
 
     public IEstadoHormiga Update(Hormiga h) {
 
+        //Espera hasta que pasan 2 segundos. Despues realiza un movimiento aleatorio
         if (isWaiting) {
             if (Time.time - time > 2) {
                 isWaiting = false;

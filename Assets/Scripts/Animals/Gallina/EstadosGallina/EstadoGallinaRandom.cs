@@ -12,6 +12,7 @@ public class EstadoGallinaRandom : IEstadoGallina {
     }
 
     public IEstadoGallina Update(Gallina g) {
+        //Espera hasta que pasan 2 segundos. Despues realiza un movimiento aleatorio
         if (isWaiting) {
             if (Time.time - time > 2) {
                 isWaiting = false;

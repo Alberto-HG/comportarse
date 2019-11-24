@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Clase encargada de generar las gallinas al principio de la simulacion
 public class SpawnerGallinas : MonoBehaviour {
     public GameObject gallinaPrefab;
     void Start() {

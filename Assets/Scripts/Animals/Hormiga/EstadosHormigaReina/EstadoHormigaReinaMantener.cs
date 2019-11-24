@@ -6,6 +6,7 @@ public class EstadoHormigaReinaMantener : IEstadoHormigaReina {
     public IEstadoHormigaReina Update(HormigaReina h) {
         Collider closestEnemy = null;
 
+        //Recorre los objetivos en su vision y se queda con el mas cercano
         foreach (Collider col in h.sonarList) {
             if (col != null) {
                 if (closestEnemy == null) {
@@ -18,6 +19,7 @@ public class EstadoHormigaReinaMantener : IEstadoHormigaReina {
             }
         }
 
+        //Si ha encontrado un enemigo huye
         if (closestEnemy != null) {
             h.eHuir.target = closestEnemy.transform;
             return h.eHuir;

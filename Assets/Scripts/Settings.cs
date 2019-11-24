@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Settings {
+    //Singletone que almacena las opciones de la simulacion y una referencia a todas las gallinas para que se puedan comunicar facilmente
     public static int numGallinas = 3;
     public static int tamGallinas = 1;
     public static int numHormigas = 1;
