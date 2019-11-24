@@ -29,6 +29,8 @@ public class Hormiga : MonoBehaviour {
     public Transform reina;
 
     void Start() {
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamHormigas;
+
         eAtacar = new EstadoHormigaAtacar();
         eBuscar = new EstadoHormigaBuscar();
         ePerseguir = new EstadoHormigaPerseguir();
@@ -45,6 +47,10 @@ public class Hormiga : MonoBehaviour {
     
     void Update() {
         estado = estado.Update(this);
+    }
+
+    public void GetHit() {
+        estado = eMuerta;
     }
 
     private void OnTriggerEnter(Collider other) {

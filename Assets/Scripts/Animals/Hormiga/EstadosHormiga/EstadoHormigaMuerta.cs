@@ -9,7 +9,7 @@ public class EstadoHormigaMuerta : IEstadoHormiga
             h.nma.Warp(h.reina.position - h.reina.forward * 2);
             return h.eBuscar;
         } else {
-            Object.Destroy(h.gameObject);
+            Object.DestroyImmediate(h.gameObject);
             return h.eMuerta;
         }
     }

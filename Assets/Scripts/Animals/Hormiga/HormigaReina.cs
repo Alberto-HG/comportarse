@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class HormigaReina : MonoBehaviour
-{
+public class HormigaReina : MonoBehaviour {
+    int vida;
+    int fuerza;
+
     IEstadoHormigaReina estado;
 
     [HideInInspector]
@@ -23,6 +25,9 @@ public class HormigaReina : MonoBehaviour
     public GameObject HormigaPrefab;
 
     void Start() {
+        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamHormigas;
+        vida = 100 * Settings.tamHormigas;
+
         eAtacar = new EstadoHormigaReinaAtacar();
         eHuir = new EstadoHormigaReinaHuir();
         eMantener = new EstadoHormigaReinaMantener();
@@ -44,6 +49,14 @@ public class HormigaReina : MonoBehaviour
 
     void Update() {
         estado = estado.Update(this);
+    }
+
+    public void GetHit(int daño) {
+        vida -= daño;
+
+        if (vida < 0) {
+            DestroyImmediate(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other) {

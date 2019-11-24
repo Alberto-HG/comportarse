@@ -11,4 +11,6 @@ public class Settings {
     public static int tamPulpos;
     public static int numTrex;
     public static int tamTrex;
+
+    public static Gallina[] gallinas;
 }
