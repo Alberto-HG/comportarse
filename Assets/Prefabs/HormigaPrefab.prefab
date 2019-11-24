@@ -44,7 +44,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184795214909034191}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.2, z: 0.5}
@@ -76,7 +76,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!114 &1184795214909034196
 MonoBehaviour:
@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85a8b9fbb32b4c24592465ba4b77d6cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fuerza: 0
   sonarList: []
   nma: {fileID: 0}
   reinaViva: 0
@@ -103,7 +104,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1184795214909034191}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.25
+  m_Radius: 0.14
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -183,6 +184,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -220756480231625755, guid: 2af031eb0c2f081429b810c111b0c0e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 582e276d07fb077488bd2547c14bc0d0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2af031eb0c2f081429b810c111b0c0e1, type: 3}
 --- !u!4 &6128141487563745365 stripped

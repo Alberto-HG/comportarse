@@ -7,11 +7,13 @@ public class EstadoGallinaBuscar : IEstadoGallina {
         Collider closestEnemy = null;
 
         foreach (Collider col in g.visionList) {
-            if (closestEnemy == null) {
-                closestEnemy = col;
-            } else {
-                if (Vector3.Distance(col.transform.position, g.transform.position) < Vector3.Distance(closestEnemy.transform.position, g.transform.position)) {
+            if (col != null) {
+                if (closestEnemy == null) {
                     closestEnemy = col;
+                } else {
+                    if (Vector3.Distance(col.transform.position, g.transform.position) < Vector3.Distance(closestEnemy.transform.position, g.transform.position)) {
+                        closestEnemy = col;
+                    }
                 }
             }
         }

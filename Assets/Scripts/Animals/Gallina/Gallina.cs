@@ -4,13 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Gallina : MonoBehaviour {
-    [HideInInspector]
     public int vida;
-    [HideInInspector]
     public int fuerza;
-    [HideInInspector]
     public float velocidad;
-    [HideInInspector]
     public bool berserk;
 
     [HideInInspector]
@@ -20,7 +16,6 @@ public class Gallina : MonoBehaviour {
     [HideInInspector]
     public float velocidadInicial;
 
-    [HideInInspector]
     public IEstadoGallina estado;
 
     [HideInInspector]
@@ -93,6 +88,20 @@ public class Gallina : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (visionList.Contains(other)) {
             visionList.Remove(other);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && estado == ePerseguir) {
+            if (collision.collider.transform == ePerseguir.target) {
+                ePerseguir.colision = true;
+            }
+        }
+
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && estado == eHuir) {
+            if (collision.collider.transform == eHuir.target) {
+                ePerseguir.colision = true;
+            }
         }
     }
 }

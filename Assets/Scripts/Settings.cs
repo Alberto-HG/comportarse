@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Settings {
-    public static int numGallinas;
-    public static int tamGallinas;
-    public static int numHormigas;
-    public static int tamHormigas;
-    public static int numPulpos;
-    public static int tamPulpos;
-    public static int numTrex;
-    public static int tamTrex;
+    public static int numGallinas = 3;
+    public static int tamGallinas = 8;
+    public static int numHormigas = 5;
+    public static int tamHormigas = 1;
+    public static int numPulpos = 1;
+    public static int tamPulpos = 1;
+    public static int numTrex = 1;
+    public static int tamTrex = 1;
 
     public static Gallina[] gallinas;
 }

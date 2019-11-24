@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class HormigaReina : MonoBehaviour {
-    int vida;
-    int fuerza;
+    public int vida;
+    public int fuerza;
 
     IEstadoHormigaReina estado;
 
@@ -55,6 +55,9 @@ public class HormigaReina : MonoBehaviour {
         vida -= daño;
 
         if (vida < 0) {
+            foreach (Hormiga h in hormigas) {
+                h.reinaViva = false;
+            }
             DestroyImmediate(gameObject);
         }
     }
@@ -68,6 +71,14 @@ public class HormigaReina : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (sonarList.Contains(other)) {
             sonarList.Remove(other);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && estado == eHuir) {
+            if (collision.collider.transform == eHuir.target) {
+                eHuir.colision = true;
+            }
         }
     }
 }

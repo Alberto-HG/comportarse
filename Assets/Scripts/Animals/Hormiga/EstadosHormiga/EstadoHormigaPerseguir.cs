@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class EstadoHormigaPerseguir : IEstadoHormiga {
     public Transform target;
+    public bool colision = false;
     public IEstadoHormiga Update(Hormiga h) {
         if (target == null) {
             return h.eBuscar;
         }
 
-        if (Vector3.Distance(h.transform.position, target.position) > 1) {
+        if (!colision) {
             h.nma.destination = target.position;
             return h.ePerseguir;
         } else {
+            h.eAtacar.target = target;
+            colision = false;
             target = null;
             return h.eAtacar;
         }

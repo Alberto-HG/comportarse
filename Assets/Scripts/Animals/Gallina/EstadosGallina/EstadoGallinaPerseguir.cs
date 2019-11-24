@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class EstadoGallinaPerseguir : IEstadoGallina {
     public Transform target;
+    public bool colision = false;
 
     public IEstadoGallina Update(Gallina g) {
         if (target == null) {
             return g.eBuscar;
         }
 
-        if (Vector3.Distance(g.transform.position, target.position) > 2) {
+        if (!colision) {
             g.nma.destination = target.position;
             return g.ePerseguir;
         } else {
+            colision = false;
+
             int numGrupo = 0;
             int gLibres = 0;
 

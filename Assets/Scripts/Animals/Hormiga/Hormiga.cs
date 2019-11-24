@@ -7,6 +7,8 @@ public class Hormiga : MonoBehaviour {
 
     IEstadoHormiga estado;
 
+    public int fuerza;
+
     [HideInInspector]
     public EstadoHormigaAtacar eAtacar;
     [HideInInspector]
@@ -30,6 +32,7 @@ public class Hormiga : MonoBehaviour {
 
     void Start() {
         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z) * Settings.tamHormigas;
+        fuerza = Settings.tamHormigas;
 
         eAtacar = new EstadoHormigaAtacar();
         eBuscar = new EstadoHormigaBuscar();
@@ -62,6 +65,14 @@ public class Hormiga : MonoBehaviour {
     private void OnTriggerExit(Collider other) {
         if (sonarList.Contains(other)) {
             sonarList.Remove(other);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision) {
+        if (!gameObject.CompareTag(collision.collider.tag) && !collision.collider.isTrigger && estado == ePerseguir) {
+            if (collision.collider.transform == ePerseguir.target) {
+                ePerseguir.colision = true;
+            }
         }
     }
 }
