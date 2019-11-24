@@ -6,33 +6,48 @@ public class TRexStateAttack : IStatesTRex {
 
     float force;
     int attackSpeed = 5;
-    ScriptDeMierdaParaProbarCosas rival;
 
     public IStatesTRex Update(TRex t) {
 
-        t.agent.speed = attackSpeed;
-        force = t.size * 10;
         if (t.enemy == null) {
             return t.wanderState;
-        } else {
-            t.agent.destination = t.enemy.transform.position;
         }
-        if (t.agent.remainingDistance < 2) {
-            t.agent.isStopped = true;
-            rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
 
-            //ESTO HAY QUE CAMBIARLO PARA QUE SOLO SE EJECUTE SI EL RIVAL MUERE, ES EJEMPLO DE CADAVER
-            rival.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            
-            t.health -= rival.force;
-            if (force < rival.health) {
-                //AQUI DEBERIA CAMBIAR LA VIDA DEL RIVAL
-                return t.attackState;
+        t.agent.speed = attackSpeed;
+        force = Settings.tamTrex * 10;
+        if (t.agent.remainingDistance > 1) {
+            t.agent.isStopped = false;
+            if (t.enemy == null) {
+                return t.wanderState;
             } else {
-                return t.eatState;
+                t.agent.destination = t.enemy.transform.position;
+                return t.attackState;
             }
         } else {
-            return t.attackState;
+            t.agent.isStopped = true;
+            if (t.enemy.gameObject.CompareTag("Pulpo")) {
+                Octopus rival = t.enemy.GetComponent<Octopus>();
+                rival.GetHit((int)force);
+                if (t.enemy == null) {
+                    t.health += 20;
+                }
+            } else if(t.enemy.gameObject.CompareTag("Hormiga")) {
+            Hormiga rival = t.enemy.GetComponent<Hormiga>();
+            if (rival == null) {
+                HormigaReina rivalHR = t.enemy.GetComponent<HormigaReina>();
+                rivalHR.GetHit((int)force);
+                } else {
+                    rival.GetHit();
+                }
+            } else if(t.enemy.gameObject.CompareTag("Gallina")) {
+                Gallina rival = t.enemy.GetComponent<Gallina>();
+                rival.GetHit((int)force);
+                if (t.enemy == null) {
+                    t.health += 20;
+                }
+            }
         }
+
+        return t.attackState;
     }
 }

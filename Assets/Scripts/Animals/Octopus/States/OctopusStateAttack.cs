@@ -4,49 +4,54 @@ using UnityEngine;
 
 public class OctopusStateAttack : IStatesOctopus {
 
-    ScriptDeMierdaParaProbarCosas rival;
     public float force;
-    public int enemies;
-    public float enemySize;
     public int speed = 5;
 
     public IStatesOctopus Update(Octopus o) {
 
-        rival = o.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
-        enemies = rival.groupSize;
-        enemySize = rival.size;
-        if (o.water) {
-            force = o.size * 15f;
-        } else {
-            force = o.size * 5f;
-        }
-        o.agent.speed = speed;
         if (o.enemy == null) {
             return o.wanderState;
-        } else {
-            o.agent.destination = o.enemy.transform.position;
         }
-        if (o.agent.remainingDistance < 2) {
-            o.agent.isStopped = true;
-            rival = o.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
 
-            //ESTO HAY QUE CAMBIARLO PARA QUE SOLO SE EJECUTE SI EL RIVAL MUERE, ES EJEMPLO DE CADAVER
-            rival.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        if(o.health < Settings.tamPulpos * 15) {
+            return o.runState;
+        }
 
-            o.health -= rival.force;
-            if(o.health > 30) {
-                if (force < rival.health) {
-                    //AQUI DEBERIA CAMBIAR LA VIDA DEL RIVAL
-                    return o.attackState;
-                } else {
-                    o.agent.isStopped = false;
-                    return o.wanderState;
-                }
+        if (o.water) {
+            force = Settings.tamPulpos * 15f;
+            o.agent.speed = speed * 2;
+        } else {
+            force = Settings.tamPulpos * 5f;
+            o.agent.speed = speed;
+        }
+
+        if (o.agent.remainingDistance > 1) {
+            o.agent.isStopped = false;
+            if (o.enemy == null) {
+                return o.wanderState;
             } else {
-                return o.runState;
+                o.agent.destination = o.enemy.transform.position;
+                return o.attackState;
             }
         } else {
-            return o.attackState;
+            o.agent.isStopped = true;
+            if (o.enemy.gameObject.CompareTag("TRex")) {
+                TRex rival = o.enemy.GetComponent<TRex>();
+                rival.GetHit((int)force);
+            } else if (o.enemy.gameObject.CompareTag("Hormiga")) {
+                Hormiga rival = o.enemy.GetComponent<Hormiga>();
+                if (rival == null) {
+                    HormigaReina rivalHR = o.enemy.GetComponent<HormigaReina>();
+                    rivalHR.GetHit((int)force);
+                } else {
+                    rival.GetHit();
+                }
+            } else if (o.enemy.gameObject.CompareTag("Gallina")) {
+                Gallina rival = o.enemy.GetComponent<Gallina>();
+                rival.GetHit((int)force);
+            }
         }
+
+        return o.attackState;
     }
 }

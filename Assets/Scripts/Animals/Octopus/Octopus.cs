@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public class Octopus : MonoBehaviour {
 
-    public float health;
-    public int size;
+    public int health;
     public bool water;
     public Transform waterTerrain;
 
@@ -26,8 +25,7 @@ public class Octopus : MonoBehaviour {
     public NavMeshAgent agent;
 
     void Start() {
-        health = 100;
-        size = 2;
+        health = Settings.tamTrex * 50;
         water = false;
 
         attackState = new OctopusStateAttack();
@@ -40,14 +38,26 @@ public class Octopus : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if (this.transform.position.y <= -4.6) {
+            water = true;
+        } else {
+            water = false;
+        }
         state = state.Update(this);
-        if (health <= 0) {
-            //DIE
+    }
+    public void GetHit(int damage) {
+        health -= damage;
+
+        if (health < 0) {
+            DestroyImmediate(gameObject);
         }
     }
 
+
     private void OnTriggerEnter(Collider col) {
-        enemy = col;
-        state = attackState;
+        if (enemy == null && (col.gameObject.CompareTag("Gallina") || col.gameObject.CompareTag("TRex") || col.gameObject.CompareTag("Hormiga"))) {
+            enemy = col;
+            state = attackState;
+        }
     }
 }

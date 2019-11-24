@@ -4,25 +4,40 @@ using UnityEngine;
 
 public class TRexStateSearch : IStatesTRex {
 
-    int enemies;
-    ScriptDeMierdaParaProbarCosas rival;
-    float enemySize;
     float force;
 
     public IStatesTRex Update(TRex t) {
 
-        rival = t.enemy.GetComponent<ScriptDeMierdaParaProbarCosas>();
-        enemies = rival.groupSize;
-        enemySize = rival.size;
-        force = t.size * 7.5f;
-        if (t.grouped) {
+        force = Settings.tamTrex * 7.5f;
+        if (t.grouped > 0) {
             force *= 2;
         }
-        int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
-        if(rand < enemies * enemySize) {
-            return t.runState;
+        if (t.enemy.gameObject.CompareTag("Pulpo")) {
+            int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
+            if (rand < Settings.tamPulpos * 15) {
+                return t.runState;
+            } else {
+                return t.attackState;
+            }
+        } else if (t.enemy.gameObject.CompareTag("Hormiga")) {
+            Hormiga rival = t.enemy.GetComponent<Hormiga>();
+            if (rival == null) {
+                int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
+                if (rand < Settings.tamHormigas * 10) {
+                    return t.runState;
+                } else {
+                    return t.attackState;
+                }
+            } else {
+                return t.attackState;
+            }
         } else {
-            return t.attackState;
+            int rand = Random.Range((int)(force * 0.75f), (int)(force * 1.25f));
+            if (rand < Settings.tamGallinas * 5) {
+                return t.runState;
+            } else {
+                return t.attackState;
+            }
         }
     }
 }

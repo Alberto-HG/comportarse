@@ -5,9 +5,8 @@ using UnityEngine.AI;
 
 public class TRex : MonoBehaviour {
 
-    public float health;
-    public int size;
-    public bool grouped;
+    public int health;
+    public int grouped;
 
     [HideInInspector]
     public Collider enemy;
@@ -16,8 +15,6 @@ public class TRex : MonoBehaviour {
 
     [HideInInspector]
     public TRexStateAttack attackState;
-    [HideInInspector]
-    public TRexStateEat eatState;
     [HideInInspector]
     public TRexStateSearch searchState;
     [HideInInspector]
@@ -29,12 +26,10 @@ public class TRex : MonoBehaviour {
     public NavMeshAgent agent;
 
     void Start() {
-        health = 100;
-        size = 2;
-        grouped = false;
+        health = Settings.tamTrex * 50;
+        grouped = 0;
 
         attackState = new TRexStateAttack();
-        eatState = new TRexStateEat();
         searchState = new TRexStateSearch();
         runState = new TRexStateRun();
         wanderState = new TRexStateWander();
@@ -46,23 +41,28 @@ public class TRex : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         state = state.Update(this);
-        if(health <= 0) {
-            //DIE
+    }
+
+    public void GetHit (int damage) {
+        health -= damage;
+
+        if (health < 0) {
+            DestroyImmediate(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider col) {
-        if(col.GetComponent<TRex>() != null) {
-            grouped = true;
-        } else {
+        if(col.gameObject.CompareTag(gameObject.tag)) {
+            grouped++;
+        } else if (enemy == null && (col.gameObject.CompareTag("Pulpo") || col.gameObject.CompareTag("TRex") || col.gameObject.CompareTag("Hormiga"))) {
             enemy = col;
             state = searchState;
         }
     }
 
     private void OnTriggerExit(Collider col) {
-        if (col.GetComponent<TRex>() != null) {
-            grouped = false;
+        if (col.gameObject.CompareTag(gameObject.tag)) {
+            grouped--;
         }
     }
 }

@@ -14,9 +14,7 @@ public class OctopusStateWander : IStatesOctopus {
             o.agent.speed = speed;
         }
         int rand = Random.Range(0, 100);
-        if (rand > 80) {
-            o.agent.destination = o.transform.position + new Vector3((Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80);
-        }
+        o.agent.destination = o.transform.position + new Vector3((Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80, (Random.value - 0.5f) * 80);
         return o.wanderState;
     }
 }
